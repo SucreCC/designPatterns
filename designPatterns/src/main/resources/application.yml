@@ -3,5 +3,37 @@ server:
 spring:
   application:
     name: prduct-bread
-
-
+  datasource:
+    base:
+      name: baseServiceDataSource
+      driverClassName: com.mysql.cj.jdbc.Driver
+      jdbcUrl: jdbc:mysql://172.16.1.15:3306/fgmp?useSSL=false&serverTimezone=GMT%2B8&autoReconnect=true&sessionVariables=FOREIGN_KEY_CHECKS=0&useUnicode=yes&characterEncoding=UTF-8&rewriteBatchedStatements=true
+      username: root
+      password: 123456
+      autoCommit: true
+      connectionTimeout: 5000
+      idleTimeout: 600000 # 链接空闲多久被删除
+      maxLifetime: 1800000 # 链接最大生存时间
+      minimumIdle: 8 # 池中保留的最小空闲链接
+      maximumPoolSize: 100 # 池中最大链接数
+      poolName: icc-db
+      validationTimeout: 3000
+      connectionTestQuery: SELECT 1 # 默认在borrow时校验有效性
+    jpa:
+      database: MYSQL
+      properties:
+        javax.persistence.sharedCache.mode: ENABLE_SELECTIVE
+        hibernate:
+          hbm2ddl.auto: none # validate 启动程序时只做校验，不会更改表结构
+          dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+          format_sql: true
+          show_sql: true
+          cache.use_query_cache: true
+          cache.use_second_level_cache: true
+          cache.region.factory_class: ehcache
+          cache.ehcache.missing_cache_strategy: create
+          hibernate.javax.cache.uri: ehcache.xml
+          jdbc.batch_size: 5000
+          jdbc.batch_versioned_data: true
+          order_inserts: true
+          order_updates: true
