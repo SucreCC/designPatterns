@@ -1,0 +1,25 @@
+
+server:
+  port: 199510
+spring:
+  application:
+    name: prduct-bread
+
+
+  datasource:
+    base:
+      name: baseServiceDataSource
+      driverClassName: com.mysql.cj.jdbc.Driver
+      jdbcUrl: jdbc:mysql://172.16.1.15:3306/fgmp?useSSL=false&serverTimezone=GMT%2B8&autoReconnect=true&sessionVariables=FOREIGN_KEY_CHECKS=0&useUnicode=yes&characterEncoding=UTF-8&rewriteBatchedStatements=true
+      username: root
+      password: 123456
+      autoCommit: true
+      connectionTimeout: 5000
+      idleTimeout: 600000 # 链接空闲多久被删除
+      maxLifetime: 1800000 # 链接最大生存时间
+      minimumIdle: 8 # 池中保留的最小空闲链接
+      maximumPoolSize: 100 # 池中最大链接数
+      poolName: icc-db
+      validationTimeout: 3000
+      connectionTestQuery: SELECT 1 # 默认在borrow时校验有效性
+
